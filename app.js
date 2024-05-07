@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-const userRoute = require('./src/routes/userRoute'); // Importa rota
+const userRoute = require('./src/routes/userRoute'); 
+const projectRoute = require('./src/routes/projectRoute'); 
 
 // Configurar acesso à BD.
 const mongoose = require('mongoose');
@@ -16,6 +17,7 @@ db.on('error', console.error.bind(console, 'Erro ao conectar ao MongoDB'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(userRoute)
+app.use(projectRoute)
 
 
 

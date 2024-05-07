@@ -1,6 +1,12 @@
 var User = require('../models/userModel');
-exports.getUser = function (req, res) {
-    res.send('Olá! Testing controller');
+
+exports.getUser = async function (req, res) {
+    try {
+        const result = await User.find();
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json(err);
+    }
 };
 
 exports.create = function (req, res) {
@@ -15,4 +21,13 @@ exports.create = function (req, res) {
         .catch((err) => {
             res.status(500).send({message: `${err.message} - falha ao cadastrar usuário.`})
         })
+    };
+
+    exports.details = async function (req, res) {
+        try {
+            const result = await User.findById(req.params.id);
+            res.status(200).json(result)
+        } catch (err) {
+            res.status(500).json(err);
+        }
     };
